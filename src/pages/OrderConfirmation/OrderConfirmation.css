@@ -1,210 +1,317 @@
-/* ==========================================================================
-   OrderConfirmation.css - Premium Styles for Order Confirmation Page
-   ========================================================================== */
-
-.order-confirm-page {
-  font-family: 'Outfit', sans-serif;
-  background-color: #F0EEFF;
+.order-conf-page {
+  background-color: #f7f9fa;
   min-height: 100vh;
-  padding: 3rem 0;
-  display: flex;
-  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-.order-confirm-card {
-  background: white;
-  border-radius: 28px;
-  padding: 3rem 2.5rem;
-  box-shadow: 0 8px 32px rgba(94, 53, 177, 0.08);
-  text-align: center;
-  max-width: 520px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-/* ─── SUCCESS ICON ─── */
-.success-icon-wrap {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 2rem;
-  width: 160px;
-  height: 160px;
-}
-
-.success-bg-circle {
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(94,53,177,0.12) 0%, rgba(94,53,177,0) 70%);
-}
-
-.success-circle {
-  width: 96px;
-  height: 96px;
-  background: #5E35B1;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  position: relative;
-  z-index: 2;
-  box-shadow: 0 12px 32px rgba(94, 53, 177, 0.35);
-  animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes scaleIn {
-  from { transform: scale(0); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
-
-/* Confetti-style decorative elements */
-.confetti-star {
-  position: absolute;
-  animation: twinkle 2s infinite alternate;
-}
-.confetti-star.s1 { top: 8px; left: 12px; color: #F5A623; font-size: 1.2rem; animation-delay: 0s; }
-.confetti-star.s2 { top: 20px; right: 16px; color: #7C4DFF; font-size: 0.9rem; animation-delay: 0.3s; }
-.confetti-star.s3 { bottom: 12px; left: 20px; color: #10B981; font-size: 0.75rem; animation-delay: 0.6s; }
-.confetti-star.s4 { bottom: 24px; right: 8px; color: #F5A623; font-size: 1rem; animation-delay: 0.9s; }
-.confetti-dot {
-  position: absolute;
-  border-radius: 50%;
-  animation: bounce 1.5s infinite alternate;
-}
-.confetti-dot.d1 { width: 8px; height: 8px; background: #F43F5E; top: 40px; left: 4px; animation-delay: 0.2s; }
-.confetti-dot.d2 { width: 6px; height: 6px; background: #F5A623; bottom: 40px; right: 4px; animation-delay: 0.5s; }
-.confetti-dash {
-  position: absolute;
-  border-radius: 4px;
-  animation: slide 1.8s infinite alternate;
-}
-.confetti-dash.da1 { width: 20px; height: 6px; background: #7C4DFF; top: 64px; left: 4px; transform: rotate(-30deg); }
-.confetti-dash.da2 { width: 16px; height: 6px; background: #10B981; bottom: 52px; right: 4px; transform: rotate(30deg); }
-
-@keyframes twinkle {
-  from { transform: scale(1) rotate(0deg); opacity: 0.7; }
-  to   { transform: scale(1.3) rotate(20deg); opacity: 1; }
-}
-@keyframes bounce {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-6px); }
-}
-@keyframes slide {
-  from { transform: translateX(0) rotate(-30deg); }
-  to   { transform: translateX(6px) rotate(-10deg); }
-}
-
-/* ─── TEXT ─── */
-.order-confirm-title {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #1A295A;
-  margin-bottom: 0.75rem;
-}
-
-.order-confirm-subtitle {
-  font-size: 1rem;
-  color: #5A6B8A;
-  margin-bottom: 2rem;
-}
-
-.order-number {
-  color: #5E35B1;
-  font-weight: 800;
-}
-
-/* ─── BUTTONS ─── */
-.order-view-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  background: #5E35B1;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 18px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(94, 53, 177, 0.3);
-  transition: all 0.2s;
-  text-decoration: none;
-  margin-bottom: 1rem;
-}
-.order-view-btn:hover {
-  background: #4A2A8C;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(94, 53, 177, 0.4);
-  color: white;
-}
-
-.order-continue-link {
-  display: block;
-  color: #5E35B1;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-}
-
-/* ─── THANK YOU CARD ─── */
-.order-thankyou-card {
-  background: linear-gradient(135deg, #F0EEFF 0%, #EDE8FF 100%);
-  border-radius: 20px;
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  text-align: left;
-  position: relative;
+/* Banner */
+.oc-banner {
+  background-color: #e8f5e9;
+  border-radius: 12px;
   overflow: hidden;
 }
 
-.order-thankyou-house {
-  font-size: 4rem;
+.oc-banner-content {
+  position: relative;
+}
+
+.oc-success-icon-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00897b;
   flex-shrink: 0;
-  line-height: 1;
 }
 
-.order-thankyou-text h4 {
-  font-weight: 800;
-  color: #1A295A;
-  font-size: 1.05rem;
-  margin-bottom: 4px;
+/* Decorative Dashes */
+.oc-dash {
+  position: absolute;
+  width: 4px;
+  height: 12px;
+  background-color: #00897b;
+  border-radius: 4px;
+}
+.oc-dash.d1 { top: -15px; left: 50%; transform: translateX(-50%); }
+.oc-dash.d2 { bottom: -15px; left: 50%; transform: translateX(-50%); }
+.oc-dash.d3 { left: -15px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+.oc-dash.d4 { right: -15px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+.oc-dash.d5 { top: -5px; right: -5px; transform: rotate(45deg); }
+.oc-dash.d6 { bottom: -5px; left: -5px; transform: rotate(45deg); }
+
+.oc-title {
+  color: #00695c;
+  font-size: 26px;
+  font-weight: 700;
 }
 
-.order-thankyou-text p {
-  color: #5A6B8A;
-  font-size: 0.875rem;
+.oc-subtitle {
+  color: #455a64;
+  font-size: 15px;
+}
+
+.oc-link {
+  color: #00897b;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.oc-link:hover {
+  text-decoration: underline;
+}
+
+/* Cards */
+.oc-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  border: 1px solid #edf2f7;
+}
+
+.oc-card-grey {
+  background-color: #f8f9fc;
+  border: none;
+}
+
+.oc-section-title {
+  color: #1a202c;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.oc-badge-confirmed {
+  background-color: #e6fffa;
+  color: #319795;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.oc-icon-box {
+  width: 40px;
+  height: 40px;
+  background-color: #e6fffa;
+  color: #00897b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.oc-icon-box-light {
+  width: 40px;
+  height: 40px;
+  background-color: #f7fafc;
+  color: #38b2ac;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.oc-icon-box-purple {
+  width: 40px;
+  height: 40px;
+  background-color: #e9d8fd;
+  color: #553c9a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.oc-divider {
+  border-color: #e2e8f0;
+  opacity: 1;
+}
+
+.oc-label {
+  color: #718096;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.oc-value {
+  color: #2d3748;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Help Banner */
+.oc-help-banner {
+  background-color: #f0fff4;
+  border-radius: 8px;
+}
+
+.oc-info-icon {
+  color: #00897b;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.oc-help-title {
+  color: #276749;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.oc-help-text {
+  color: #4a5568;
+  font-size: 13px;
+}
+
+.oc-btn-support {
+  background-color: #ffffff;
+  color: #38a169;
+  border: 1px solid #68d391;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.oc-btn-support:hover {
+  background-color: #f0fff4;
+  color: #276749;
+}
+
+/* Timeline */
+.oc-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.oc-timeline-step {
+  display: flex;
+  gap: 16px;
+}
+
+.oc-step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.oc-step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #718096;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.oc-timeline-step.active .oc-step-dot {
+  background-color: #38a169;
+  color: #ffffff;
+}
+
+.oc-step-line {
+  width: 2px;
+  height: 100%;
+  min-height: 40px;
+  background-color: #e2e8f0;
+  margin: 4px 0;
+}
+
+.oc-step-content {
+  padding-bottom: 24px;
+}
+
+.oc-step-title {
+  color: #2d3748;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.oc-step-time {
+  color: #a0aec0;
+  font-size: 11px;
+}
+
+.oc-step-desc {
+  color: #718096;
+  font-size: 13px;
   margin: 0;
 }
 
-.order-thankyou-leaf {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.15;
-  color: #5E35B1;
+/* Buttons */
+.oc-btn-continue {
+  background-color: #FFD814 !important;
+  color: #0F1111 !important;
+  border: 1px solid #FCD200 !important;
+  border-radius: 8px;
+  padding: 12px;
+  transition: background-color 0.2s;
+  box-shadow: 0 2px 5px rgba(213,217,217,0.5);
 }
 
-/* ─── MOBILE ─── */
+.oc-btn-continue:hover {
+  background-color: #F7CA00 !important;
+  border-color: #F2C200 !important;
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .order-confirm-page {
-    padding: 1.5rem 0;
-    align-items: flex-start;
+  .oc-banner-content {
+    padding: 1.5rem !important;
+    text-align: center;
   }
-  .order-confirm-card {
-    padding: 2rem 1.5rem;
-    border-radius: 20px;
+  
+  .oc-banner-content .d-flex {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem !important;
   }
-  .order-confirm-title {
-    font-size: 1.5rem;
+  
+  .oc-success-icon-wrapper {
+    margin: 0 auto;
+  }
+  
+  .oc-title {
+    font-size: 22px;
+  }
+  
+  .oc-link {
+    justify-content: center;
+  }
+  
+  .oc-card {
+    padding: 1.5rem !important;
+  }
+  
+  .oc-help-banner {
+    text-align: center;
+  }
+  
+  .oc-help-banner .d-flex {
+    flex-direction: column;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+  
+  .oc-btn-support {
+    width: 100%;
+    justify-content: center;
   }
 }

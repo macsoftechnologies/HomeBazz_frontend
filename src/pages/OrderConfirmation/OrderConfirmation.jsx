@@ -1,59 +1,197 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { BiCheck, BiRightArrowAlt, BiLeaf } from 'react-icons/bi';
+import { BiCheck, BiEnvelope, BiPackage, BiCalendar, BiCar, BiReceipt, BiInfoCircle, BiHeadphone, BiCheckCircle } from 'react-icons/bi';
 import './OrderConfirmation.css';
 
 const OrderConfirmation = () => {
-  const orderNumber = 'HB123456';
+  const orderNumber = '406-1234567-8901234';
+
+  useEffect(() => {
+    // Clear the cart on successful order
+    localStorage.removeItem('cart');
+    window.dispatchEvent(new Event('storage'));
+  }, []);
 
   return (
-    <div className="order-confirm-page">
-      <div className="container">
-        <div className="order-confirm-card">
-          
-          {/* Success Icon with Confetti */}
-          <div className="d-flex justify-content-center">
-            <div className="success-icon-wrap">
-              <div className="success-bg-circle"></div>
+    <div className="order-conf-page">
+      <div className="container py-4" style={{ maxWidth: '1200px' }}>
 
-              {/* Confetti decorations */}
-              <span className="confetti-star s1">✦</span>
-              <span className="confetti-star s2">✧</span>
-              <span className="confetti-star s3">✦</span>
-              <span className="confetti-star s4">✧</span>
-              <div className="confetti-dot d1"></div>
-              <div className="confetti-dot d2"></div>
-              <div className="confetti-dash da1"></div>
-              <div className="confetti-dash da2"></div>
+        {/* Top Banner */}
+        <div className="oc-banner mb-4">
+          <div className="oc-banner-content d-flex flex-column flex-md-row align-items-center justify-content-between p-4 px-md-5">
 
-              <div className="success-circle">
-                <BiCheck size={52} strokeWidth={2} />
+            <div className="d-flex align-items-center gap-4 mb-4 mb-md-0">
+              <div className="oc-success-icon-wrapper">
+                <div className="oc-success-icon">
+                  <BiCheck size={48} />
+                </div>
+                {/* Decorative dashes around the circle */}
+                <span className="oc-dash d1"></span>
+                <span className="oc-dash d2"></span>
+                <span className="oc-dash d3"></span>
+                <span className="oc-dash d4"></span>
+                <span className="oc-dash d5"></span>
+                <span className="oc-dash d6"></span>
+              </div>
+
+              <div>
+                <h1 className="oc-title mb-2">Order placed, thank you!</h1>
+                <p className="oc-subtitle mb-2">Your order has been successfully placed. A confirmation will be sent to your email shortly.</p>
+                <Link to="#" className="oc-link d-flex align-items-center gap-2">
+                  <BiEnvelope size={18} />
+                  Review or edit your recent orders
+                </Link>
+              </div>
+            </div>
+
+            <div className="oc-banner-image d-none d-md-block">
+              <img src="/grocery_bag_thank_you.jpg" alt="Thank you for shopping" style={{ width: '260px', mixBlendMode: 'multiply' }} />
+            </div>
+
+          </div>
+        </div>
+
+        {/* Content Section */}
+        <div className="row g-4">
+
+          {/* Left Column: Order Details */}
+          <div className="col-12 col-lg-8">
+            <div className="oc-card p-4 h-100">
+              <div className="d-flex align-items-center gap-3 mb-4">
+                <div className="oc-icon-box">
+                  <BiPackage size={24} />
+                </div>
+                <h3 className="oc-section-title m-0">Order Details</h3>
+                <span className="oc-badge-confirmed"><BiCheckCircle size={14} /> Confirmed</span>
+              </div>
+
+              <hr className="oc-divider mb-4" />
+
+              <div className="row g-4 mb-5">
+                <div className="col-sm-4">
+                  <div className="d-flex gap-3">
+                    <div className="oc-icon-box-light">
+                      <BiCalendar size={20} />
+                    </div>
+                    <div>
+                      <div className="oc-label">Order Date</div>
+                      <div className="oc-value fw-bold">Tomorrow</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-sm-4">
+                  <div className="d-flex gap-3">
+                    <div className="oc-icon-box-light">
+                      <BiCar size={20} />
+                    </div>
+                    <div>
+                      <div className="oc-label">Delivery to</div>
+                      <div className="oc-value">
+                        Sankar Rao, 12-4-45, Beach Road,<br />
+                        Visakhapatnam, ANDHRA PRADESH 530016
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-sm-4">
+                  <div className="d-flex gap-3">
+                    <div className="oc-icon-box-light">
+                      <BiReceipt size={20} />
+                    </div>
+                    <div>
+                      <div className="oc-label">Order #</div>
+                      <div className="oc-value fw-bold" style={{ color: '#007185' }}>{orderNumber}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Need Help Banner */}
+              <div className="oc-help-banner p-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+                <div className="d-flex gap-3 align-items-start">
+                  <div className="oc-info-icon">
+                    <BiInfoCircle size={22} />
+                  </div>
+                  <div>
+                    <h5 className="oc-help-title mb-1">Need help?</h5>
+                    <p className="oc-help-text mb-0">If you have any questions about your order, feel free to contact our support team.</p>
+                  </div>
+                </div>
+                <button className="btn oc-btn-support d-flex align-items-center gap-2 px-4 flex-shrink-0">
+                  <BiHeadphone size={20} />
+                  Contact Support
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Success Text */}
-          <h1 className="order-confirm-title">Order Placed Successfully!</h1>
-          <p className="order-confirm-subtitle">
-            Your order <span className="order-number">#{orderNumber}</span> has been placed.
-          </p>
+          {/* Right Column: Timeline & Action */}
+          <div className="col-12 col-lg-4">
+            <div className="oc-card oc-card-grey p-4 h-100 d-flex flex-column">
 
-          {/* Action Buttons */}
-          <Link to="/shop" className="order-view-btn">
-            View Order Details <BiRightArrowAlt size={22} />
-          </Link>
-          <Link to="/shop" className="order-continue-link">
-            Continue Shopping
-          </Link>
+              <div className="d-flex align-items-center gap-3 mb-2">
+                <div className="oc-icon-box-purple">
+                  <BiCar size={24} />
+                </div>
+                <h3 className="oc-section-title m-0">What happens next?</h3>
+              </div>
+              <p className="oc-subtitle mb-4">We are currently processing your order.</p>
 
-          {/* Thank You Card */}
-          <div className="order-thankyou-card">
-            <div className="order-thankyou-house">🏠</div>
-            <div className="order-thankyou-text">
-              <h4>Thank you for supporting home makers!</h4>
-              <p>Together we make homes happier 💜</p>
+              <div className="oc-timeline flex-grow-1 mb-4">
+
+                {/* Step 1 */}
+                <div className="oc-timeline-step active">
+                  <div className="oc-step-indicator">
+                    <div className="oc-step-dot">1</div>
+                    <div className="oc-step-line"></div>
+                  </div>
+                  <div className="oc-step-content w-100">
+                    <div className="d-flex justify-content-between align-items-start mb-1">
+                      <h5 className="oc-step-title mb-0">Order Confirmed</h5>
+                      <span className="oc-step-time text-success" style={{ fontSize: '11px', fontWeight: '500' }}>Today, 12:45 PM <BiCheckCircle /></span>
+                    </div>
+                    <p className="oc-step-desc">Your order has been placed successfully.</p>
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="oc-timeline-step">
+                  <div className="oc-step-indicator">
+                    <div className="oc-step-dot">2</div>
+                    <div className="oc-step-line"></div>
+                  </div>
+                  <div className="oc-step-content w-100">
+                    <div className="d-flex justify-content-between align-items-start mb-1">
+                      <h5 className="oc-step-title mb-0">Preparing for Dispatch</h5>
+                      <span className="oc-step-time">Pending</span>
+                    </div>
+                    <p className="oc-step-desc">We will update you once it's packed.</p>
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="oc-timeline-step">
+                  <div className="oc-step-indicator">
+                    <div className="oc-step-dot">3</div>
+                  </div>
+                  <div className="oc-step-content w-100">
+                    <div className="d-flex justify-content-between align-items-start mb-1">
+                      <h5 className="oc-step-title mb-0">Out for Delivery</h5>
+                      <span className="oc-step-time">Pending</span>
+                    </div>
+                    <p className="oc-step-desc">Track your order in real-time.</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <Link to="/shop" className="btn oc-btn-continue w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
+                <BiPackage size={20} />
+                Continue Shopping &gt;
+              </Link>
             </div>
-            <BiLeaf className="order-thankyou-leaf" size={80} />
           </div>
 
         </div>

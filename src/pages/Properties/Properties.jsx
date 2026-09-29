@@ -1,289 +1,236 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { products, categories } from '../../data/dummyData';
-import {
-  BiHome, BiRestaurant, BiHeart, BiLeaf, BiCloset, BiDiamond, BiShoppingBag,
-  BiRightArrowAlt, BiChevronDown, BiGridAlt, BiListUl, BiStar, BiHeart as BiHeartOutline, BiCartAdd, BiChevronLeft, BiChevronRight, BiMenu, BiX, BiSearch
-} from 'react-icons/bi';
+import { BiStar, BiChevronDown } from 'react-icons/bi';
 import './Properties.css';
-
-// Mapping icons for sidebar
-const iconMap = {
-  'c1': <BiRestaurant />,
-  'c2': <BiHeart />,
-  'c3': <BiLeaf />,
-  'c4': <BiCloset />,
-  'c5': <BiDiamond />,
-  'c6': <BiShoppingBag />,
-};
-
-// Dummy data for subcategory Explore cards
-const exploreSubcategories = [
-  { id: 'pickles', name: 'Gongura Pickle', count: 12, variant: 'purple', image: 'https://images.unsplash.com/photo-1599321955726-e048426594af?q=80&w=600&auto=format&fit=crop' },
-  { id: 'pickles', name: 'Mango Pickle', count: 10, variant: 'green', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=600&auto=format&fit=crop' },
-  { id: 'pickles', name: 'Lemon Pickle', count: 8, variant: 'orange', image: 'https://images.unsplash.com/photo-1599321955726-e048426594af?q=80&w=600&auto=format&fit=crop' },
-  { id: 'pickles', name: 'Tomato Pickle', count: 6, variant: 'pink', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=600&auto=format&fit=crop' },
-  { id: 'pickles', name: 'Avakaya Pickle', count: 9, variant: 'orange', image: 'https://images.unsplash.com/photo-1599321955726-e048426594af?q=80&w=600&auto=format&fit=crop' },
-  { id: 'pickles', name: 'Onion Pickle', count: 7, variant: 'purple', image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=600&auto=format&fit=crop' }
-];
 
 const Properties = () => {
   const { category, subcategory } = useParams();
   const navigate = useNavigate();
-  const [sortBy, setSortBy] = useState('popularity');
-  const [viewMode, setViewMode] = useState('grid');
-  const [activeSubcat, setActiveSubcat] = useState('all');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  // Filter products by category if present
+  let filteredProducts = products;
+  if (category) {
+    const normCategory = category.replace('-', ' ').toLowerCase();
+    filteredProducts = products.filter(p => {
+      const pCat = p.category ? p.category.toLowerCase() : '';
+      return pCat.includes(normCategory) || normCategory.includes(pCat);
+    });
+  }
 
-  // Dummy subcategories for the pill menu
-  const overviewPills = ['All', 'Snacks Pickles', 'Sweets', 'Bakery', 'Spice Powders', 'Ready-to-cook', 'Dairy', 'Beverages'];
-  const listingPills = ['All (6)', 'Mango (1)', 'Gongura (1)', 'Lemon (1)', 'Mixed (1)', 'Tomato (1)', 'Onion (1)'];
+  // Duplicate dummy products to fill the grid (makes it look like a real shop)
+  const displayedProducts = filteredProducts.length > 0 
+    ? [...filteredProducts, ...filteredProducts, ...filteredProducts, ...filteredProducts] 
+    : [...products, ...products, ...products];
 
-  const currentPills = subcategory ? listingPills : overviewPills;
+  const handleAddToCart = (product) => {
+    let cart = [];
+    try {
+      const saved = localStorage.getItem('cart');
+      if (saved) cart = JSON.parse(saved);
+    } catch (e) {}
 
-  // Duplicate dummy products to fill the grid
-  const displayedProducts = products.concat(products);
-
-  // Get current category name
-  const currentCategoryName = category
-    ? categories.find(c => c.id === category)?.name || 'Products'
-    : 'All Categories';
-
-  const isListingMode = !!subcategory;
-  const pageTitle = isListingMode ? (subcategory.charAt(0).toUpperCase() + subcategory.slice(1)) : (category ? `${currentCategoryName} Categories` : 'All Categories');
-  const pageSubtitle = isListingMode
-    ? `Authentic homemade ${subcategory} from selected home makers`
-    : 'Explore our wide range of homemade delicacies';
+    const existingItem = cart.find(item => item.id === product.id);
+    if (existingItem) {
+      existingItem.qty += 1;
+    } else {
+      cart.push({
+        id: product.id,
+        title: product.name + " " + product.description,
+        image: product.images[0],
+        inStock: true,
+        delivery: 'Wed, 30 Sept',
+        gift: false,
+        color: 'Default',
+        qty: 1,
+        price: product.price,
+        mrp: product.price + 500,
+      });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.dispatchEvent(new Event('cartUpdated'));
+    // Removed navigate('/cart') as per user request
+  };
 
   return (
-    <div className="shop-page py-4 min-vh-100">
-      <div className="container-fluid">
-        <div className="row">
+    <div className="amz-shop-page pb-5" style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
 
-          {/* ─── SIDEBAR ─── */}
-          <div className="col-lg-3">
-            {/* Mobile overlay backdrop */}
-            <div className={`shop-sidebar-backdrop d-lg-none ${isSidebarOpen ? 'show' : ''}`} onClick={() => setIsSidebarOpen(false)}></div>
 
-            <div className={`shop-sidebar-wrapper ${isSidebarOpen ? 'open' : ''}`}>
-              <div className="shop-sidebar">
-                {/* Mobile Close Button */}
-                <div className="d-flex justify-content-between align-items-center d-lg-none mb-3 pb-3 border-bottom">
-                  <h5 className="mb-0 fw-bold" style={{ color: '#1A295A' }}>Categories</h5>
-                  <button className="btn btn-sm btn-light rounded-circle" onClick={() => setIsSidebarOpen(false)}>
-                    <BiX size={24} />
-                  </button>
-                </div>
-
-                <ul className="shop-sidebar-menu">
-                  <li>
-                    <Link to="/shop" className={`shop-sidebar-item ${!category ? 'active' : ''}`} onClick={() => setIsSidebarOpen(false)}>
-                      <div className="d-flex align-items-center gap-3">
-                        <span className="shop-sidebar-icon"><BiHome /></span>
-                        <span className="shop-sidebar-text">All Categories</span>
-                      </div>
-                      <BiChevronRight className="shop-sidebar-chevron" size={20} />
-                    </Link>
-                  </li>
-                  {categories.map(c => (
-                    <li key={c.id}>
-                      <Link
-                        to={`/shop/${c.id}`}
-                        className={`shop-sidebar-item ${category === c.id ? 'active' : ''}`}
-                        onClick={() => setIsSidebarOpen(false)}
-                      >
-                        <div className="d-flex align-items-center gap-3">
-                          <span className="shop-sidebar-icon">{iconMap[c.id] || <BiRestaurant />}</span>
-                          <span className="shop-sidebar-text">{c.name}</span>
-                        </div>
-                        <BiChevronRight className="shop-sidebar-chevron" size={20} />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Promo Box */}
-                <div className="sidebar-promo-box d-none d-lg-block mt-4">
-                  <div className="sidebar-promo-content">
-                    <span className="sidebar-promo-badge">DISCOVER</span>
-                    <h4 className="sidebar-promo-title">Unique &<br />Handmade Products</h4>
-                    <p className="sidebar-promo-subtitle">Support small business<br />and shop with heart <BiHeartOutline size={14}/></p>
-                    <Link to="/shop?sale=true" className="sidebar-promo-btn text-decoration-none mt-2">
-                      Explore Now <BiRightArrowAlt size={16} />
-                    </Link>
-                  </div>
-                  {/* Decorative element for promo */}
-                  <div className="sidebar-promo-decoration"></div>
-                </div>
-              </div>
+      {/* Top Banner / Results Info */}
+      <div className="amz-results-bar border-bottom py-2 shadow-sm mb-3">
+        <div className="container-fluid px-3 px-md-4">
+          <div className="d-flex justify-content-between align-items-center">
+            <span className="fw-bold" style={{ fontSize: '14px', color: '#0F1111' }}>1-48 of over 10,000 results</span>
+            <div className="amz-sort-dropdown border rounded px-2 py-1 shadow-sm" style={{ fontSize: '13px', backgroundColor: '#F0F2F2', cursor: 'pointer' }}>
+              Sort by: <span className="fw-bold">Featured</span> <BiChevronDown size={16} />
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* ─── MAIN CONTENT ─── */}
-          <div className="col-lg-9 mt-4 mt-lg-0">
-
-            {/* Mobile Sidebar Toggle Button */}
-            <div className="d-lg-none mb-3">
-              <button
-                className="btn w-100 d-flex align-items-center justify-content-center gap-2"
-                style={{ background: '#F3F0FF', color: '#5E35B1', fontWeight: 600, border: '1px solid #EBE5FF', borderRadius: '12px', padding: '12px' }}
-                onClick={() => setIsSidebarOpen(true)}
-              >
-                <BiMenu size={22} /> Browse Categories
-              </button>
-            </div>
-
-            {/* Header & Breadcrumb */}
-            <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-start mb-4">
-              <div className="mb-3 mb-md-0">
-                <div className="shop-breadcrumb">
-                  {isListingMode ? (
-                    <><Link to="/">Home</Link> &gt; <Link to="/shop">Shop</Link> &gt; <Link to={`/shop/${category}`}>{currentCategoryName}</Link> &gt; {pageTitle}</>
-                  ) : (
-                    <><Link to="/">Home</Link> &gt; {category ? <><Link to="/shop">Shop</Link> &gt; {currentCategoryName}</> : 'Shop'}</>
-                  )}
-                </div>
-                <h1 className="shop-page-title">{pageTitle}</h1>
-                <p className="shop-page-subtitle mb-0">{pageSubtitle}</p>
-              </div>
-
-              <div className="shop-header-actions d-flex flex-wrap align-items-center gap-3 justify-content-start justify-content-md-end">
-                <button type="button" onClick={() => navigate(-1)} className="hb-back-btn">
-                  <BiChevronLeft size={20} /> Back
-                </button>
-                <div className="shop-search-wrap">
-                  <BiSearch className="shop-search-icon" size={18} />
-                  <input
-                    type="text"
-                    className="shop-search-input"
-                    placeholder="Search products..."
-                  />
-                </div>
+      <div className="container-fluid px-3 px-md-4">
+        <div className="row">
+          
+          {/* ─── LEFT SIDEBAR (FILTERS) ─── */}
+          <div className="col-12 col-md-3 col-xl-2 d-none d-md-block amz-sidebar border-end pe-4">
+            
+            <div className="filter-group mb-4">
+              <h6 className="fw-bold text-dark mb-2" style={{fontSize: '14px'}}>Eligible for Free Shipping</h6>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="freeShipping" />
+                <label className="form-check-label" htmlFor="freeShipping" style={{fontSize: '14px', color: '#0F1111'}}>
+                  Free Shipping
+                </label>
               </div>
             </div>
 
-            {/* Subcategory Pills */}
-            <div className="shop-subcategory-pills">
-              {currentPills.map((subcat, idx) => {
-                const subcatKey = subcat.split(' ')[0].toLowerCase();
+            <div className="filter-group mb-4">
+              <h6 className="fw-bold text-dark mb-2" style={{fontSize: '14px'}}>Category</h6>
+              <ul className="list-unstyled ms-2" style={{fontSize: '14px', color: '#0F1111', lineHeight: '1.8'}}>
+                <li>&lt; Any Category</li>
+                <li className="fw-bold ms-2">Products</li>
+                <li className="ms-3">Food & Snacks</li>
+                <li className="ms-3">Handmade Crafts</li>
+                <li className="ms-3">Art & Decor</li>
+                <li className="ms-3">Clothing</li>
+                <li className="ms-3">Jewellery</li>
+              </ul>
+            </div>
 
-                const handlePillClick = () => {
-                  if (!isListingMode) {
-                    if (subcatKey !== 'all') {
-                      navigate(`/shop/${category || 'c1'}/${subcatKey}`);
-                    }
-                  } else {
-                    setActiveSubcat(subcatKey);
-                  }
-                };
+            <div className="filter-group mb-4">
+              <h6 className="fw-bold text-dark mb-2" style={{fontSize: '14px'}}>Brands</h6>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="brand1" />
+                <label className="form-check-label" htmlFor="brand1" style={{fontSize: '14px'}}>HomeBazz</label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="brand2" />
+                <label className="form-check-label" htmlFor="brand2" style={{fontSize: '14px'}}>Local Makers</label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="brand3" />
+                <label className="form-check-label" htmlFor="brand3" style={{fontSize: '14px'}}>Artisans</label>
+              </div>
+            </div>
+
+            <div className="filter-group mb-4">
+              <h6 className="fw-bold text-dark mb-2" style={{fontSize: '14px'}}>Price</h6>
+              <ul className="list-unstyled" style={{fontSize: '14px', color: '#0F1111', lineHeight: '1.8'}}>
+                <li>Under ₹250</li>
+                <li>₹250 - ₹500</li>
+                <li>₹500 - ₹1,000</li>
+                <li>Over ₹1,000</li>
+              </ul>
+            </div>
+
+            <div className="filter-group mb-4">
+              <h6 className="fw-bold text-dark mb-2" style={{fontSize: '14px'}}>Pay On Delivery</h6>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="cod" />
+                <label className="form-check-label" htmlFor="cod" style={{fontSize: '14px'}}>Eligible for Pay On Delivery</label>
+              </div>
+            </div>
+
+            <div className="filter-group mb-4">
+              <h6 className="fw-bold text-dark mb-2" style={{fontSize: '14px'}}>Discount</h6>
+              <ul className="list-unstyled" style={{fontSize: '14px', color: '#0F1111', lineHeight: '1.8'}}>
+                <li>10% Off or more</li>
+                <li>25% Off or more</li>
+                <li>50% Off or more</li>
+              </ul>
+            </div>
+
+          </div>
+
+          {/* ─── MAIN CONTENT (RESULTS GRID) ─── */}
+          <div className="col-12 col-md-9 col-xl-10">
+            <h3 className="fw-bold mb-3" style={{fontSize: '20px', color: '#0F1111'}}>Results</h3>
+            <p className="text-muted mb-4" style={{fontSize: '14px'}}>Check each product page for other buying options. Price and other details may vary based on product size and colour.</p>
+            
+            <div className="row g-3">
+              {displayedProducts.map((product, idx) => {
+                // Adjusting the dummy data to fit the exact screenshot layout perfectly
+                const boughtCount = "10K+ bought in past month";
+                const mrp = product.price + 150;
+                const discount = Math.round(((mrp - product.price) / mrp) * 100);
+                const volumePrice = (product.price / 2).toFixed(2); // Dummy calculation for /100ml
 
                 return (
-                  <button
-                    key={subcat}
-                    className={`shop-pill ${(!isListingMode && subcatKey === 'all') ? 'active' : (isListingMode && activeSubcat === subcatKey ? 'active' : '')}`}
-                    onClick={handlePillClick}
-                  >
-                    {subcat}
-                  </button>
+                  <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3" key={`${product.id}-${idx}`}>
+                    <div className="amz-product-card h-100 p-2 position-relative d-flex flex-column" style={{border: '1px solid #e7e7e7', borderRadius: '4px', backgroundColor: '#fff'}}>
+                      
+                      {/* Image */}
+                      <Link to={`/product/${product.id}`} className="text-center rounded mb-2 d-flex justify-content-center w-100 overflow-hidden" style={{height: '240px'}}>
+                        <img src={product.images[0]} alt={product.name} className="w-100 h-100" style={{objectFit: 'cover'}} />
+                      </Link>
+
+                      {/* Details */}
+                      <div className="amz-product-details d-flex flex-column flex-grow-1 px-1">
+                        
+                        {/* Title */}
+                        <Link to={`/product/${product.id}`} className="text-decoration-none">
+                          <h2 className="amz-product-title text-dark mb-1" style={{fontSize: '15px', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden'}} title={product.name}>
+                            {product.name} | {product.description} | High Quality Enriched
+                          </h2>
+                        </Link>
+
+                        {/* Variant Badge */}
+                        <div className="mb-1">
+                          <span className="bg-light border text-dark px-1 py-1 d-inline-block" style={{fontSize: '11px'}}>{product.category || 'Variant'}</span>
+                        </div>
+
+                        {/* Rating */}
+                        <div className="amz-rating d-flex align-items-center mb-1 gap-1 flex-wrap" style={{fontSize: '13px'}}>
+                          <span style={{color: '#0F1111'}}>{product.rating}</span>
+                          <div className="d-flex text-warning">
+                            <BiStar size={14} />
+                            <BiStar size={14} />
+                            <BiStar size={14} />
+                            <BiStar size={14} />
+                            <BiStar size={14} style={{opacity: 0.5}} />
+                          </div>
+                          <BiChevronDown size={14} className="text-muted ms-n1" />
+                          <span className="text-decoration-none ms-1" style={{color: '#007185'}}>({product.reviews}K)</span>
+                        </div>
+
+                        <div className="text-muted mb-2 text-truncate" style={{fontSize: '12px'}}>{boughtCount}</div>
+
+                        {/* Price Block */}
+                        <div className="amz-price mb-1 d-flex flex-wrap align-items-baseline gap-1" style={{lineHeight: '1.2'}}>
+                          <span className="fw-bold" style={{fontSize: '22px', color: '#0F1111'}}><span style={{fontSize: '11px', verticalAlign: 'top', position: 'relative', top: '4px'}}>₹</span>{product.price}</span>
+                          <span className="text-dark" style={{fontSize: '11px'}}>(₹{volumePrice}/100 ml)</span>
+                          <span className="text-muted text-decoration-line-through ms-1" style={{fontSize: '11px'}}>M.R.P: ₹{mrp}</span>
+                        </div>
+                        
+                        <div className="text-dark mb-1" style={{fontSize: '11px'}}>
+                          ({discount}% off)
+                        </div>
+
+                        <div className="mb-2" style={{fontSize: '12px', color: '#0F1111'}}>
+                          Up to 5% back with Amazon Pay ICICI card
+                        </div>
+
+                        <div className="mb-3" style={{fontSize: '12px', color: '#0F1111'}}>
+                          <span className="fw-bold text-truncate d-block">FREE delivery <span className="fw-bold">Sat, 3 Oct</span></span>
+                          <span className="text-dark">Or fastest delivery <strong>Today 5 pm - 7 pm</strong></span>
+                        </div>
+
+                        {/* Add to Cart Button */}
+                        <div className="mt-auto pt-2">
+                          <button onClick={(e) => { e.preventDefault(); handleAddToCart(product); }} className="amz-add-btn w-100 rounded-pill fw-bold border-0 shadow-sm py-2" style={{backgroundColor: '#5742e8', color: '#fff', fontSize: '13px'}}>
+                            Add to cart
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
                 );
               })}
             </div>
-
-            {/* Grid */}
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-md-4">
-
-              {!isListingMode ? (
-                // ─── OVERVIEW MODE: SHOW EXPLORE CARDS ───
-                exploreSubcategories.map((sub, idx) => (
-                  <div className="col" key={`explore-${idx}`}>
-                    <div className="shop-product-card p-3">
-                      <div className="shop-product-heart" style={{ top: '8px', right: '8px' }}>
-                        <BiHeartOutline size={20} />
-                      </div>
-                      <Link to={`/shop/${category || 'c1'}/${sub.id}`} className="text-decoration-none">
-                        <img src={sub.image} alt={sub.name} className="w-100 rounded-3 mb-3 object-fit-cover" style={{ height: '160px' }} />
-                        <h4 className="shop-product-title mb-1 text-dark">{sub.name}</h4>
-                        <p className="shop-explore-subtitle">{sub.count} Products</p>
-                      </Link>
-                      <Link to={`/shop/${category || 'c1'}/${sub.id}`} className={`shop-explore-btn mt-auto variant-${sub.variant}`}>
-                        Explore <BiRightArrowAlt size={18} />
-                      </Link>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                // ─── LISTING MODE: SHOW PRODUCT CARDS ───
-                displayedProducts.map((product, idx) => (
-                  <div className="col" key={`${product.id}-${idx}`}>
-                    <div className="shop-product-card">
-
-                      <div className="shop-product-img-wrap">
-                        <div className="shop-product-heart">
-                          <BiHeartOutline size={20} />
-                        </div>
-                        <Link to={`/product/${product.id}`} className="w-100 h-100">
-                          <img src={product.images[0]} alt={product.name} className="shop-product-img" />
-                        </Link>
-                      </div>
-
-                      <div className="shop-product-body">
-                        <Link to={`/product/${product.id}`} className="text-decoration-none">
-                          <h3 className="shop-product-title text-truncate" title={product.name}>{product.name}</h3>
-                        </Link>
-
-                        <div className="shop-product-meta">
-                          <div className="shop-product-rating">
-                            <BiStar size={14} color="#F5A623" />
-                            <span style={{ color: '#1A295A', fontWeight: 600 }}>{product.rating}</span>
-                            <span>({product.reviews})</span>
-                          </div>
-                          <span className="shop-product-stock">In Stock</span>
-                        </div>
-
-                        <div className="shop-product-price">₹{product.price}</div>
-
-                        <div className="shop-product-actions">
-                          <div className="shop-qty-selector">
-                            <button className="shop-qty-btn">-</button>
-                            <input type="text" className="shop-qty-input" value="1" readOnly />
-                            <button className="shop-qty-btn">+</button>
-                          </div>
-                          <button className="shop-add-btn">
-                            <BiCartAdd size={20} /> Add to Cart
-                          </button>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                ))
-              )}
-
-            </div>
-
-            {/* Pagination & Footer Note (Only in Listing Mode) */}
-            {isListingMode && (
-              <div className="shop-pagination-wrap">
-                <div className="shop-pagination">
-                  <button className="shop-page-btn nav-btn"><BiChevronLeft size={20} /></button>
-                  <button className="shop-page-btn active">1</button>
-                  <button className="shop-page-btn">2</button>
-                  <button className="shop-page-btn">3</button>
-                  <span className="shop-page-btn" style={{ pointerEvents: 'none' }}>...</span>
-                  <button className="shop-page-btn">10</button>
-                  <button className="shop-page-btn nav-btn"><BiChevronRight size={20} /></button>
-                </div>
-
-                <div className="d-flex align-items-center justify-content-between w-100 mt-2 px-2">
-                  <div className="d-none d-sm-flex align-items-center gap-2" style={{ color: '#5A6B8A', fontStyle: 'italic', fontSize: '0.85rem' }}>
-                    <BiLeaf size={16} color="#7B61C9" /> Good Food Brings People Together
-                  </div>
-                  <span className="shop-pagination-text w-100 text-center text-sm-end">Showing 1-6 of 56 products</span>
-                </div>
-              </div>
-            )}
-
+            
           </div>
+
         </div>
       </div>
     </div>
