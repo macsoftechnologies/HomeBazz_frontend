@@ -34,7 +34,7 @@ const Footer = () => {
           <div className="row py-5">
             {/* Column 1: Brand & Socials */}
             <div className="col-12 col-lg-4 mb-4 mb-lg-0 pe-lg-4">
-              <div className="mb-4" style={{ filter: 'brightness(0) invert(1)' }}>
+              <div className="mb-4">
                 <Link to="/" className="text-decoration-none">
                   <Logo width={160} />
                 </Link>

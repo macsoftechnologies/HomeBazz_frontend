@@ -403,8 +403,8 @@ const Home = () => {
                        style={{backgroundColor: item.bgColor, backgroundImage: `url(${item.img})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '420px', width: '100%'}}>
                     
                     <div className="p-3 pb-5" style={{background: 'linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%)', zIndex: 1}}>
-                      <h4 className="fw-bold mb-1" style={{color: item.textColor || '#111', fontSize: '24px'}}>{item.title}</h4>
-                      <p className="mb-0" style={{color: item.textColor || '#333', fontSize: '14px', fontWeight: '500'}}>{item.subtitle}</p>
+                      <h4 className="fw-bold mb-1" style={{color: item.textColor || '#111', fontSize: '28px'}}>{item.title}</h4>
+                      <p className="mb-0" style={{color: item.textColor || '#333', fontSize: '16px', fontWeight: '500'}}>{item.subtitle}</p>
                     </div>
 
                     <div className="mt-auto p-3 position-relative" style={{zIndex: 1}}>
@@ -412,8 +412,8 @@ const Home = () => {
                         {item.features.map((feat, idx) => (
                           <div key={idx} className="d-flex flex-column align-items-center text-center px-1" style={{flex: 1}}>
                             <div className="mb-1" style={{color: '#1c449c'}}>{feat.icon}</div>
-                            <div className="fw-bold" style={{fontSize: '9px', color: '#111', lineHeight: '1'}}>{feat.title}</div>
-                            <div className="text-muted" style={{fontSize: '8px', lineHeight: '1', marginTop: '2px'}}>{feat.desc}</div>
+                            <div className="fw-bold" style={{fontSize: '12px', color: '#111', lineHeight: '1'}}>{feat.title}</div>
+                            <div className="text-muted" style={{fontSize: '10px', lineHeight: '1', marginTop: '2px'}}>{feat.desc}</div>
                           </div>
                         ))}
                       </div>
@@ -424,8 +424,8 @@ const Home = () => {
                        style={{backgroundColor: item.bgColor, minHeight: '420px', width: '100%'}}>
                     
                     <div className="mb-2">
-                      <h4 className="fw-bold text-white mb-1" style={{fontSize: '24px'}}>{item.title}</h4>
-                      <p className="text-white mb-0" style={{fontSize: '14px', opacity: 0.9}}>{item.subtitle}</p>
+                      <h4 className="fw-bold text-white mb-1" style={{fontSize: '28px'}}>{item.title}</h4>
+                      <p className="text-white mb-0" style={{fontSize: '16px', opacity: 0.9}}>{item.subtitle}</p>
                     </div>
 
                     <div className="row g-2 flex-grow-1">
@@ -433,12 +433,12 @@ const Home = () => {
                         <div key={idx} className="col-6 d-flex flex-column">
                           <div className="bg-white rounded p-1 px-2 h-100 position-relative overflow-hidden d-flex flex-column justify-content-center">
                             <img src={prod.img} alt={prod.name} className="w-100 object-fit-cover rounded mb-1" style={{height: '75px'}} />
-                            <div className="fw-bold" style={{fontSize: '11px', lineHeight: '1.1', color: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{prod.name}</div>
+                            <div className="fw-bold" style={{fontSize: '14px', lineHeight: '1.1', color: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{prod.name}</div>
                             <div className="d-flex align-items-center gap-1">
-                              <span className="fw-bold text-dark" style={{fontSize: '11px'}}>{prod.price}</span>
-                              <span className="text-muted text-decoration-line-through" style={{fontSize: '9px'}}>{prod.oldPrice}</span>
+                              <span className="fw-bold text-dark" style={{fontSize: '14px'}}>{prod.price}</span>
+                              <span className="text-muted text-decoration-line-through" style={{fontSize: '12px'}}>{prod.oldPrice}</span>
                             </div>
-                            <div><span className="d-inline-block bg-primary text-white rounded px-1" style={{fontSize: '8px', padding: '2px 0'}}>{prod.off}</span></div>
+                            <div><span className="d-inline-block bg-primary text-white rounded px-1" style={{fontSize: '10px', padding: '2px 0'}}>{prod.off}</span></div>
                           </div>
                         </div>
                       ))}
@@ -466,10 +466,10 @@ const Home = () => {
                 }
               }}
               style={{
-                width: '8px', 
-                height: '8px', 
+                width: '12px', 
+                height: '12px', 
                 borderRadius: '50%', 
-                backgroundColor: activeIndex === idx ? '#5742e8' : '#e0e0e0',
+                backgroundColor: activeIndex === idx ? '#ff7f50' : '#e0e0e0',
                 transition: 'background-color 0.3s',
                 cursor: 'pointer'
               }} 

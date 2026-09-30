@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <>
       <header className="bg-white border-bottom shadow-sm position-sticky top-0" style={{zIndex: 1000}}>
-        <div className="container-fluid px-3 px-lg-4 d-flex align-items-center py-2 gap-3" style={{minHeight: '70px'}}>
+        <div className="container-fluid px-2 px-md-3 px-lg-4 d-flex align-items-center py-2 gap-1 gap-md-3 justify-content-between" style={{minHeight: '70px'}}>
           
           {/* Logo */}
           <Link to="/" className="text-decoration-none flex-shrink-0 d-flex align-items-center me-md-2 pt-1">
@@ -51,59 +51,57 @@ const Header = () => {
           </Link>
 
           {/* Location details */}
-          <div className="d-none d-xl-flex flex-column lh-1 text-dark cursor-pointer ms-2" style={{maxWidth: '120px'}}>
-            <span className="text-muted" style={{fontSize: '11px', paddingLeft: '18px'}}>Deliver to Sankar</span>
-            <span className="fw-bold d-flex align-items-center gap-1" style={{fontSize: '13px', color: '#0F1111'}}>
-              <BiMap size={16} className="flex-shrink-0" /> Visakhapatnam 530...
-            </span>
+          <div className="d-none d-xl-flex align-items-center text-dark cursor-pointer ms-2 gap-1">
+            <BiMap size={22} className="text-muted" />
+            <div className="d-flex flex-column lh-sm">
+              <span className="text-muted" style={{fontSize: '11px'}}>Deliver to Sankar</span>
+              <span className="fw-bold" style={{fontSize: '13px', color: '#333'}}>Visakhapatnam 530...</span>
+            </div>
           </div>
 
-          {/* Search Bar - Amazon style */}
-          <div className="flex-grow-1 d-none d-md-flex align-items-center mx-3">
-            <div className="d-flex w-100 border rounded" style={{borderColor: '#cdcdcd', overflow: 'hidden'}}>
-              <select className="bg-light border-0 px-2 text-muted" style={{outline: 'none', borderRight: '1px solid #cdcdcd', fontSize: '12px', width: 'auto', backgroundColor: '#f3f3f3'}}>
-                <option>All</option>
+          {/* Search Bar - Modern Rounded */}
+          <div className="flex-grow-1 d-none d-md-flex align-items-center mx-3 mx-lg-4">
+            <div className="d-flex w-100 border rounded-pill shadow-sm" style={{borderColor: '#e2e2e2', overflow: 'hidden', height: '44px'}}>
+              <select className="bg-light border-0 px-3 text-muted" style={{outline: 'none', borderRight: '1px solid #e2e2e2', fontSize: '13px', width: 'auto', cursor: 'pointer'}}>
+                <option>All Categories</option>
                 <option>Food</option>
                 <option>Handmade</option>
               </select>
-              <input type="text" className="form-control border-0 px-3 py-2" placeholder="Search HomeBazz" style={{boxShadow: 'none', fontSize: '15px'}} />
-              <button className="border-0 px-3 d-flex align-items-center justify-content-center cursor-pointer" style={{backgroundColor: '#febd69', color: '#0F1111', width: '45px'}}>
-                <BiSearch size={22} />
+              <input type="text" className="form-control border-0 px-3 h-100" placeholder="Search HomeBazz..." style={{boxShadow: 'none', fontSize: '14px', backgroundColor: '#fff'}} />
+              <button className="border-0 px-4 h-100 d-flex align-items-center justify-content-center cursor-pointer text-white" style={{backgroundColor: 'rgb(154, 140, 209)', transition: 'background-color 0.2s'}} onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'rgb(134, 120, 189)'} onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'rgb(154, 140, 209)'}>
+                <BiSearch size={20} />
               </button>
             </div>
           </div>
-          
-          {/* Mobile Search Icon */}
-          <div className="d-flex d-md-none ms-auto text-dark cursor-pointer">
-            <BiSearch size={24} />
-          </div>
+          {/* Right Side Items */}
+          <div className="d-flex align-items-center gap-2 gap-md-3 ms-auto">
+            
+            {/* Mobile Search Icon */}
+            <div className="d-flex d-md-none text-dark cursor-pointer p-1">
+              <BiSearch size={22} />
+            </div>
 
-          {/* Right Actions Container */}
-          <div className="d-flex align-items-center gap-3 gap-lg-4 ms-auto ms-md-0">
-
-            {/* My Account / Login */}
-            <div className="d-none d-sm-flex flex-column lh-1 text-dark cursor-pointer" onClick={openLogin}>
-              <span style={{fontSize: '11px'}}>Hello, sign in</span>
-              <span className="fw-bold d-flex align-items-center gap-1" style={{fontSize: '13px', color: '#0F1111'}}>
-                Account & Lists <BiCaretDown size={12} />
-              </span>
+            {/* Login / Signup */}
+            <div className="d-flex align-items-center gap-1 gap-md-2">
+              <button className="btn btn-outline-primary btn-sm rounded-pill px-2 px-md-3 fw-bold border-2 text-nowrap" style={{fontSize: '11px'}} onClick={openLogin}>Login</button>
+              <button className="btn btn-primary btn-sm rounded-pill px-2 px-md-3 fw-bold shadow-sm text-nowrap" style={{fontSize: '11px'}} onClick={openSignup}>Sign Up</button>
             </div>
 
             {/* Orders / Wishlist */}
-            <Link to="/wishlist" className="d-none d-lg-flex flex-column lh-1 text-dark text-decoration-none">
-              <span style={{fontSize: '11px'}}>Returns</span>
-              <span className="fw-bold" style={{fontSize: '13px', color: '#0F1111'}}>& Orders</span>
+            <Link to="/wishlist" className="d-none d-lg-flex flex-column lh-sm text-dark text-decoration-none align-items-start">
+              <span className="text-muted" style={{fontSize: '11px'}}>Returns</span>
+              <span className="fw-bold" style={{fontSize: '13px', color: '#333'}}>& Orders</span>
             </Link>
 
             {/* Cart */}
-            <Link to="/cart" className="text-decoration-none d-flex align-items-center text-dark position-relative">
-              <div className="position-relative d-flex align-items-end pt-1">
-                <BiCart size={38} color="#0F1111" />
-                <span className="position-absolute text-warning fw-bold d-flex justify-content-center w-100" style={{fontSize: '14px', top: '-1px', left: '-2px'}}>{cartCount}</span>
+            <Link to="/cart" className="text-decoration-none d-flex align-items-center gap-1 gap-md-2 text-dark ms-1 ms-md-0">
+              <div className="position-relative d-flex align-items-center">
+                <BiCart size={28} className="d-md-none" color="#333" />
+                <BiCart size={32} className="d-none d-md-block" color="#333" />
+                <span className="position-absolute bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center fw-bold" style={{fontSize: '10px', top: '-4px', right: '-6px', width: '16px', height: '16px'}}>{cartCount}</span>
               </div>
-              <span className="fw-bold d-none d-md-block pb-1" style={{fontSize: '13px', marginTop: 'auto', color: '#0F1111'}}>Cart</span>
+              <span className="fw-bold d-none d-md-block" style={{fontSize: '14px', color: '#333'}}>Cart</span>
             </Link>
-
           </div>
         </div>
 

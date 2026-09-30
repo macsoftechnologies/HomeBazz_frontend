@@ -144,7 +144,7 @@ const Properties = () => {
 
           {/* ─── MAIN CONTENT (RESULTS GRID) ─── */}
           <div className="col-12 col-md-9 col-xl-10">
-            <h3 className="fw-bold mb-3" style={{fontSize: '20px', color: '#0F1111'}}>Results</h3>
+            <h3 className="fw-bold mb-3 text-capitalize" style={{fontSize: '20px', color: '#0F1111'}}>{category ? `${category.replace('-', ' ')} Results` : 'Results'}</h3>
             <p className="text-muted mb-4" style={{fontSize: '14px'}}>Check each product page for other buying options. Price and other details may vary based on product size and colour.</p>
             
             <div className="row g-3">
