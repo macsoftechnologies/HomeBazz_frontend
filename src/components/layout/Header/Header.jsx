@@ -3,12 +3,15 @@ import { Link, useLocation } from 'react-router-dom';
 import { BiHeart, BiCart, BiSearch, BiMap, BiUser, BiCaretDown, BiMenu } from 'react-icons/bi';
 import Logo from '../../common/Logo/Logo';
 import AuthModal from '../../common/AuthModal/AuthModal';
+import CountdownTimer from '../../common/CountdownTimer/CountdownTimer';
+import Sidebar from '../Sidebar/Sidebar';
 import './Header.css';
 
 const Header = () => {
   const [authOpen, setAuthOpen] = useState(false);
   const [authTab, setAuthTab] = useState('login');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
 
   const [cartCount, setCartCount] = React.useState(0);
@@ -118,6 +121,15 @@ const Header = () => {
               <span>Categories</span>
             </div>
 
+            {/* Desktop All Menu Button */}
+            <div 
+              className="d-none d-md-flex align-items-center gap-1 cursor-pointer fw-bold px-2 py-1 me-2 rounded hover-bg-light" 
+              onClick={() => setIsSidebarOpen(true)}
+            >
+              <BiMenu size={24} />
+              <span>All</span>
+            </div>
+
             {/* Desktop Links (Hidden on Mobile) */}
             <div className="d-none d-md-flex align-items-center gap-4 flex-grow-1 overflow-auto justify-content-center" style={{whiteSpace: 'nowrap'}}>
               <Link to="/shop/food" className={`text-decoration-none fw-bold px-2 py-1 rounded ${location.pathname.includes('/food') ? 'active-nav-link' : 'text-white hover-text-light'}`}>Food</Link>
@@ -127,6 +139,9 @@ const Header = () => {
               <Link to="/shop/jewellery" className={`text-decoration-none fw-bold px-2 py-1 rounded ${location.pathname.includes('/jewellery') ? 'active-nav-link' : 'text-white hover-text-light'}`}>Jewellery</Link>
               <Link to="/shop/home-accessories" className={`text-decoration-none fw-bold px-2 py-1 rounded ${location.pathname.includes('/home-accessories') ? 'active-nav-link' : 'text-white hover-text-light'}`}>Home Accessories</Link>
             </div>
+            
+            {/* Timer on the right */}
+            <CountdownTimer />
           </div>
 
           {/* Mobile Dropdown Content */}
@@ -148,6 +163,12 @@ const Header = () => {
         isOpen={authOpen}
         onClose={() => setAuthOpen(false)}
         defaultTab={authTab}
+      />
+
+      {/* Sidebar Navigation */}
+      <Sidebar 
+        isOpen={isSidebarOpen} 
+        onClose={() => setIsSidebarOpen(false)} 
       />
     </>
   );

@@ -432,7 +432,7 @@ const Home = () => {
                       {item.products.map((prod, idx) => (
                         <div key={idx} className="col-6 d-flex flex-column">
                           <div className="bg-white rounded p-1 px-2 h-100 position-relative overflow-hidden d-flex flex-column justify-content-center">
-                            <img src={prod.img} alt={prod.name} className="w-100 object-fit-cover rounded mb-1" style={{height: '75px'}} />
+                            <img loading="lazy" src={prod.img} alt={prod.name} className="w-100 object-fit-cover rounded mb-1" style={{height: '75px'}} />
                             <div className="fw-bold" style={{fontSize: '14px', lineHeight: '1.1', color: '#111', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{prod.name}</div>
                             <div className="d-flex align-items-center gap-1">
                               <span className="fw-bold text-dark" style={{fontSize: '14px'}}>{prod.price}</span>
@@ -514,7 +514,7 @@ const Home = () => {
                           <div className="position-absolute top-0 start-0 m-1 bg-danger text-white rounded px-1 fw-bold" style={{fontSize: '9px', zIndex: 2}}>
                             {cat.off}
                           </div>
-                          <img src={cat.img} alt={cat.name} className="w-100 object-fit-cover" style={{height: '90px'}} />
+                          <img loading="lazy" src={cat.img} alt={cat.name} className="w-100 object-fit-cover" style={{height: '90px'}} />
                           <div className="p-2 text-center mt-auto d-flex align-items-center justify-content-center gap-1 border-top">
                             <span className="text-primary fw-bold" style={{color: '#5742e8', fontSize: '11px'}}>{cat.name} <BiChevronRight size={14}/></span>
                           </div>
@@ -550,7 +550,7 @@ const Home = () => {
                           <div className="position-absolute top-0 start-0 m-1 bg-danger text-white rounded px-1 fw-bold" style={{fontSize: '9px', zIndex: 2}}>
                             {cat.off}
                           </div>
-                          <img src={cat.img} alt={cat.name} className="w-100 object-fit-cover" style={{height: '90px'}} />
+                          <img loading="lazy" src={cat.img} alt={cat.name} className="w-100 object-fit-cover" style={{height: '90px'}} />
                           <div className="p-2 text-center mt-auto d-flex align-items-center justify-content-center gap-1 border-top">
                             <span className="text-primary fw-bold" style={{color: '#5742e8', fontSize: '11px'}}>{cat.name} <BiChevronRight size={14}/></span>
                           </div>
@@ -608,7 +608,7 @@ const Home = () => {
                     <div key={itemIdx} className="col-6">
                       <Link to="/product/p1" className="text-decoration-none d-block">
                         <div className="position-relative mb-1">
-                          <img src={item.img} alt={item.name} className="w-100 rounded object-fit-cover" style={{height: '130px'}} />
+                          <img loading="lazy" src={item.img} alt={item.name} className="w-100 rounded object-fit-cover" style={{height: '130px'}} />
                           <div className="position-absolute bottom-0 end-0 m-1 bg-warning text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center text-center shadow-sm" 
                                style={{width: '45px', height: '45px', fontSize: '10px', lineHeight: '1', zIndex: 2, padding: '4px'}}>
                             {item.tag}
@@ -661,7 +661,7 @@ const Home = () => {
                       <Link to="/product/p1" className="text-decoration-none d-block h-100">
                         <div className="bg-white rounded p-1 shadow-sm h-100 cursor-pointer custom-hover-card border">
                           <div className="position-relative">
-                            <img src={cat.img} alt={cat.name} className="w-100 rounded object-fit-cover" style={{height: '80px'}} />
+                            <img loading="lazy" src={cat.img} alt={cat.name} className="w-100 rounded object-fit-cover" style={{height: '80px'}} />
                             <div className="position-absolute top-0 start-0 m-1 bg-danger text-white px-1 rounded shadow-sm" style={{fontSize: '9px', fontWeight: 'bold'}}>
                               {cat.off}
                             </div>
@@ -699,7 +699,7 @@ const Home = () => {
                       <Link to="/product/p1" className="text-decoration-none d-block h-100">
                         <div className="bg-white rounded p-1 shadow-sm h-100 cursor-pointer custom-hover-card border">
                           <div className="position-relative">
-                            <img src={cat.img} alt={cat.name} className="w-100 rounded object-fit-cover" style={{height: '80px'}} />
+                            <img loading="lazy" src={cat.img} alt={cat.name} className="w-100 rounded object-fit-cover" style={{height: '80px'}} />
                             <div className="position-absolute top-0 start-0 m-1 bg-danger text-white px-1 rounded shadow-sm" style={{fontSize: '9px', fontWeight: 'bold'}}>
                               {cat.off}
                             </div>
@@ -733,7 +733,7 @@ const Home = () => {
                     <div key={itemIdx} className="col-6">
                       <Link to="/product/p1" className="text-decoration-none d-block">
                         <div className="position-relative mb-1">
-                          <img src={item.img} alt={item.name} className="w-100 rounded object-fit-cover" style={{height: '130px'}} />
+                          <img loading="lazy" src={item.img} alt={item.name} className="w-100 rounded object-fit-cover" style={{height: '130px'}} />
                           <div className="position-absolute bottom-0 end-0 m-1 bg-warning text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center text-center shadow-sm" 
                                style={{width: '45px', height: '45px', fontSize: '10px', lineHeight: '1', zIndex: 2, padding: '4px'}}>
                             {item.tag}
@@ -767,7 +767,7 @@ const Home = () => {
                     <div key={itemIdx} className="col-6">
                       <Link to="/product/p1" className="text-decoration-none d-block">
                         <div className="position-relative mb-1">
-                          <img src={item.img} alt={item.name} className="w-100 rounded object-fit-cover" style={{height: '130px'}} />
+                          <img loading="lazy" src={item.img} alt={item.name} className="w-100 rounded object-fit-cover" style={{height: '130px'}} />
                           <div className="position-absolute bottom-0 end-0 m-1 bg-warning text-dark fw-bold rounded-circle d-flex align-items-center justify-content-center text-center shadow-sm" 
                                style={{width: '45px', height: '45px', fontSize: '10px', lineHeight: '1', zIndex: 2, padding: '4px'}}>
                             {item.tag}

@@ -118,7 +118,7 @@ const Checkout = () => {
                     {items.map(item => (
                       <div key={item.id} className="d-flex gap-3 mb-3 pb-3 border-bottom">
                         <div className="bg-white p-1 rounded border flex-shrink-0">
-                          <img src={item.image} alt="item" className="object-fit-contain rounded" style={{width: '60px', height: '60px'}} />
+                          <img loading="lazy" src={item.image} alt="item" className="object-fit-contain rounded" style={{width: '60px', height: '60px'}} />
                         </div>
                         <div>
                           <div className="fw-bold mb-1" style={{fontSize: '14px', color: '#111'}}>{item.title}</div>

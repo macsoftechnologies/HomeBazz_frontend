@@ -161,7 +161,7 @@ const Properties = () => {
                       
                       {/* Image */}
                       <Link to={`/product/${product.id}`} className="text-center rounded mb-2 d-flex justify-content-center w-100 overflow-hidden" style={{height: '240px'}}>
-                        <img src={product.images[0]} alt={product.name} className="w-100 h-100" style={{objectFit: 'cover'}} />
+                        <img loading="lazy" src={product.images[0]} alt={product.name} className="w-100 h-100" style={{objectFit: 'cover'}} />
                       </Link>
 
                       {/* Details */}

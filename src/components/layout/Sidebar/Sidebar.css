@@ -1,0 +1,48 @@
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: -365px;
+  width: 365px;
+  max-width: 85vw;
+  height: 100vh;
+  z-index: 2001;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-container.open {
+  left: 0;
+}
+
+.sidebar-link {
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+}
+
+.sidebar-link:hover {
+  background-color: #EAEDED;
+}
+
+.btn-close-white {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}

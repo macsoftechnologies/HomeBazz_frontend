@@ -83,7 +83,7 @@ const PropertyDetails = () => {
                     style={{height: '50px', width: '50px', borderColor: activeImage === idx ? '#007185' : '#e7e7e7', borderWidth: activeImage === idx ? '2px' : '1px'}}
                     onMouseEnter={() => setActiveImage(idx)}
                   >
-                    <img src={img} alt="thumbnail" className="w-100 h-100 object-fit-cover mix-blend-multiply" />
+                    <img loading="lazy" src={img} alt="thumbnail" className="w-100 h-100 object-fit-cover mix-blend-multiply" />
                   </div>
                 ))}
               </div>
@@ -91,7 +91,7 @@ const PropertyDetails = () => {
                 <button className="position-absolute top-0 end-0 m-3 btn btn-light rounded-circle shadow-sm d-flex align-items-center justify-content-center p-2 border" style={{width: '35px', height: '35px'}}>
                   <BiShareAlt size={18} />
                 </button>
-                <img src={galleryImages[activeImage]} alt={product.name} className="w-100 h-100 object-fit-contain p-3 mix-blend-multiply" />
+                <img loading="lazy" src={galleryImages[activeImage]} alt={product.name} className="w-100 h-100 object-fit-contain p-3 mix-blend-multiply" />
               </div>
             </div>
           </div>
@@ -153,15 +153,15 @@ const PropertyDetails = () => {
               <div style={{fontSize: '14px'}} className="mb-2">Colour: <strong>Default</strong></div>
               <div className="d-flex gap-2">
                 <div className="border border-warning rounded p-1 text-center" style={{width: '70px', backgroundColor: '#fafafa', cursor: 'pointer'}}>
-                  <img src={product.images[0]} alt="color 1" className="w-100 object-fit-contain mix-blend-multiply mb-1" style={{height: '50px'}} />
+                  <img loading="lazy" src={product.images[0]} alt="color 1" className="w-100 object-fit-contain mix-blend-multiply mb-1" style={{height: '50px'}} />
                   <div style={{fontSize: '12px'}}>₹{product.price}</div>
                 </div>
                 <div className="border rounded p-1 text-center" style={{width: '70px', backgroundColor: '#fff', cursor: 'pointer'}}>
-                  <img src={product.images[0]} alt="color 2" className="w-100 object-fit-contain mix-blend-multiply mb-1" style={{height: '50px', filter: 'hue-rotate(90deg)'}} />
+                  <img loading="lazy" src={product.images[0]} alt="color 2" className="w-100 object-fit-contain mix-blend-multiply mb-1" style={{height: '50px', filter: 'hue-rotate(90deg)'}} />
                   <div style={{fontSize: '12px'}}>₹{product.price + 50}</div>
                 </div>
                 <div className="border rounded p-1 text-center" style={{width: '70px', backgroundColor: '#fff', cursor: 'pointer'}}>
-                  <img src={product.images[0]} alt="color 3" className="w-100 object-fit-contain mix-blend-multiply mb-1" style={{height: '50px', filter: 'hue-rotate(180deg)'}} />
+                  <img loading="lazy" src={product.images[0]} alt="color 3" className="w-100 object-fit-contain mix-blend-multiply mb-1" style={{height: '50px', filter: 'hue-rotate(180deg)'}} />
                   <div style={{fontSize: '12px'}}>₹{product.price + 10}</div>
                 </div>
               </div>
@@ -268,17 +268,17 @@ const PropertyDetails = () => {
             <div className="d-flex flex-wrap align-items-center gap-3">
               <div className="position-relative">
                 <input type="checkbox" className="position-absolute" style={{top: '10px', right: '10px'}} defaultChecked />
-                <img src={product.images[0]} alt={product.name} style={{width: '150px', height: '150px'}} className="object-fit-contain mix-blend-multiply border rounded p-2" />
+                <img loading="lazy" src={product.images[0]} alt={product.name} style={{width: '150px', height: '150px'}} className="object-fit-contain mix-blend-multiply border rounded p-2" />
               </div>
               <BiPlus size={24} className="text-muted" />
               <div className="position-relative">
                 <input type="checkbox" className="position-absolute" style={{top: '10px', right: '10px'}} defaultChecked />
-                <img src={product.images[0]} alt={product.name} style={{width: '150px', height: '150px', filter: 'hue-rotate(90deg)'}} className="object-fit-contain mix-blend-multiply border rounded p-2" />
+                <img loading="lazy" src={product.images[0]} alt={product.name} style={{width: '150px', height: '150px', filter: 'hue-rotate(90deg)'}} className="object-fit-contain mix-blend-multiply border rounded p-2" />
               </div>
               <BiPlus size={24} className="text-muted" />
               <div className="position-relative">
                 <input type="checkbox" className="position-absolute" style={{top: '10px', right: '10px'}} defaultChecked />
-                <img src={product.images[0]} alt={product.name} style={{width: '150px', height: '150px', filter: 'hue-rotate(180deg)'}} className="object-fit-contain mix-blend-multiply border rounded p-2" />
+                <img loading="lazy" src={product.images[0]} alt={product.name} style={{width: '150px', height: '150px', filter: 'hue-rotate(180deg)'}} className="object-fit-contain mix-blend-multiply border rounded p-2" />
               </div>
 
               <div className="ms-4 p-3 border rounded shadow-sm bg-white">

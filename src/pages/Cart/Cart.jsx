@@ -130,7 +130,7 @@ const Cart = () => {
                   
                   {/* Image */}
                   <div className="flex-shrink-0" style={{width: '180px'}}>
-                    <img src={item.image} alt="product" className="w-100 object-fit-contain mix-blend-multiply" style={{maxHeight: '180px'}} />
+                    <img loading="lazy" src={item.image} alt="product" className="w-100 object-fit-contain mix-blend-multiply" style={{maxHeight: '180px'}} />
                   </div>
 
                   {/* Details */}
@@ -249,7 +249,7 @@ const Cart = () => {
               <div className="d-flex flex-column gap-3">
                 {recommendedItems.map(item => (
                   <div key={item.id} className="d-flex gap-2">
-                    <img src={item.image} alt={item.title} className="object-fit-contain mix-blend-multiply flex-shrink-0" style={{width: '80px', height: '80px'}} />
+                    <img loading="lazy" src={item.image} alt={item.title} className="object-fit-contain mix-blend-multiply flex-shrink-0" style={{width: '80px', height: '80px'}} />
                     <div>
                       <Link to="#" className="text-decoration-none text-truncate d-block" style={{color: '#007185', fontSize: '13px', maxWidth: '140px'}}>
                         {item.title}

@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
       {/* Product Image */}
       <Link to={`/product/${product.id}`} className="text-decoration-none">
         <div className="position-relative bg-light" style={{ height: '220px' }}>
-          <img src={product.images[0]} alt={product.name} className="w-100 h-100 object-fit-cover" />
+          <img loading="lazy" src={product.images[0]} alt={product.name} className="w-100 h-100 object-fit-cover" />
         </div>
       </Link>
 

@@ -47,7 +47,7 @@ const AllCategories = () => {
             <div className="col-12 col-sm-6 col-lg-4" key={cat.id}>
               <Link to={`/shop/${cat.id}`} className="allcat-card">
                 <div className="allcat-card-img-wrap">
-                  <img src={cat.image} alt={cat.name} className="allcat-card-img" />
+                  <img loading="lazy" src={cat.image} alt={cat.name} className="allcat-card-img" />
                 </div>
                 <span className="allcat-card-name">{cat.name}</span>
               </Link>

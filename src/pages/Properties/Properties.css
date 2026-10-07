@@ -1,7 +1,7 @@
 /* Amazon Style Shop Page CSS */
 
 .amz-shop-page {
-  font-family: Arial, sans-serif; /* Amazon uses typical system fonts */
+  font-family: 'Poppins', sans-serif; /* Using global Poppins font */
 }
 
 .amz-sidebar .filter-group {

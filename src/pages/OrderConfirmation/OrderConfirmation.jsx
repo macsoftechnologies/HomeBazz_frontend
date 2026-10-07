@@ -45,7 +45,7 @@ const OrderConfirmation = () => {
             </div>
 
             <div className="oc-banner-image d-none d-md-block">
-              <img src="/grocery_bag_thank_you.jpg" alt="Thank you for shopping" style={{ width: '260px', mixBlendMode: 'multiply' }} />
+              <img loading="lazy" src="/grocery_bag_thank_you.jpg" alt="Thank you for shopping" style={{ width: '260px', mixBlendMode: 'multiply' }} />
             </div>
 
           </div>

@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .checkout-page {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: #F0EEFF;
   min-height: 100vh;
   padding: 2rem 0;
@@ -157,7 +157,7 @@
   background: #FAFAFB;
   outline: none;
   transition: all 0.2s;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .checkout-input:focus {
